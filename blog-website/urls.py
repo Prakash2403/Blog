@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^home/', include('home.urls')),
     url(r'^aboutme/', include('aboutme.urls')),
     url(r'^post/', include('post.urls')),
+    url(r'^search/', include('search.urls')),
     url(r'^', include('home.urls')),
 ]

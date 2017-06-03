@@ -10,6 +10,9 @@ class AboutMe(models.Model):
 
 class ContactMe(models.Model):
     name = models.CharField(max_length=50)
-    email_id = models.EmailField(max_length=100)
-    phone_no = models.IntegerField(blank=True, null=True)
+    email = models.EmailField(max_length=100)
+    phone = models.IntegerField(blank=True, null=True)
     message = models.TextField(max_length=10000)
+
+    def __str__(self):
+        return self.name + " " +self.email
