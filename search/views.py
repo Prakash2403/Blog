@@ -4,6 +4,7 @@ from home import views as home_views
 
 
 def search(request):
+    print(request.GET)
     keyword = request.GET.get("keyword", "post")
     es_client = Elasticsearch()
     result_set = Search(using=es_client, index="blog", )\

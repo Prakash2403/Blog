@@ -5,14 +5,13 @@ from django.shortcuts import render, get_object_or_404
 from aboutme.models import AboutMe, ContactMe
 
 
-aboutme = get_object_or_404(AboutMe, pk=1)
-
-
 def aboutme_view(request):
+    aboutme = get_object_or_404(AboutMe, pk=1)
     return render(request, 'aboutme/index.html', context={'aboutme': aboutme})
 
 
 def contactme_view(request):
+    aboutme = get_object_or_404(AboutMe, pk=1)
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
