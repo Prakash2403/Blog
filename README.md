@@ -1,12 +1,12 @@
-##HOW TO RUN 
+## HOW TO RUN 
 
-###Requirements:
+### Requirements:
 
 1. Postgresql should be installed.
 
 2. Go to project directory. Run pip install -r requirements.txt to install python requirememtns.
 
-###Database Settings
+### Database Settings
 
 Run the following commands in psql console:-
 
@@ -32,11 +32,11 @@ This is optional, but if you want blog search feature, you have to setup elastic
     If you are facing some problem, then open an issue and post traceback there.   
 ### Run Web Application
 
-####Prerequisite
+#### Prerequisite
   
     Above two steps must be done.
  
-####How to run the web app
+#### How to run the web app
  
     1. Go to project directory (where manage.py is located)
     2. In terminal, type python manage.py makemigrations
