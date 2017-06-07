@@ -12,7 +12,7 @@ Run the following commands in psql console:-
 
     CREATE DATABASE django_blog;
     CREATE USER django_blog WITH PASSWORD '\<set some password here\>';
-    GRANT ALL PRIVILEGES ON DATABASE pcr_blog TO pcr_blog;
+    GRANT ALL PRIVILEGES ON DATABASE djangp_blog TO django_blog;
     
 ### Environment Variables
 
