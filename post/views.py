@@ -1,5 +1,4 @@
-import json
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
@@ -11,8 +10,17 @@ from post.models import Post, Comments, Replies
 
 
 def get_all_posts(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
+    posts = Post.objects.all().order_by('-datetime')
+    num_items = request.GET.get('num_items', 3)
+    paginator = Paginator(posts, num_items)
+    page = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    context = {'posts': posts, 'num_items': num_items}
     return render(request, 'post/index.html', context=context)
 
 
@@ -23,7 +31,6 @@ def get_single_post(request, post_id):
 
 
 def post_comment(request, post_id):
-    print(request.POST)
     if request.method == 'POST':
         post = Post.objects.get(pk=post_id)
         author = request.POST.get('author', None)
@@ -38,7 +45,6 @@ def post_comment(request, post_id):
 
 
 def post_reply(request, comment_id):
-    print(request.POST)
     if request.method == 'POST':
         comment = Comments.objects.get(pk=comment_id)
         author = request.POST.get('author', None)
