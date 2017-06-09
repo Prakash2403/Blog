@@ -45,13 +45,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="/home/">Home</a>
                     </li>
                     <li>
-                        <a href="#">About Me</a>
+                        <a href="/aboutme/">About Me</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="/aboutme/#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -83,7 +83,7 @@
                     <hr>
                     <img class="img-responsive" src="http://placehold.it/900x300" alt="">
                     <hr>
-                    <p>{{ post.content }}</p>
+                    <p>{{ post.head|safe }}</p>
                     <a class="btn btn-primary" href="{% url 'single-post' post.id%}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
                 {% endfor %}

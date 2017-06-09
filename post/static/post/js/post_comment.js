@@ -6,6 +6,13 @@ $(document).ready(function() {
             url: $(this).attr('action'), // the file to call
 
             success: function(response) { // on success..
+                var currentdate = new Date();
+                var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
                 var html_content =
                     '<br>' +
                         '<li>' +
@@ -15,9 +22,10 @@ $(document).ready(function() {
                                 '</a>' +
                                 ' <div class="media-body" > ' +
                                     '<h4 class="media-heading">' +
-                                        ' <small>August 25, 2014 at 9:30 PM</small> ' +
-                                    '</h4>'
-                                    +response["content"]+
+                                        ' <small>'+datetime+
+                                        '</small>'+
+                                    '</h4>'+
+                                    response["content"]+
                                 '</div> ' +
                             '</div>' +
                         '</li>';

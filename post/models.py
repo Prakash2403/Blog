@@ -12,7 +12,7 @@ class Post(models.Model):
         return self.title
 
     def head(self):
-        return self.content[:100]
+        return self.content[:250]+'...'
 
     def indexing(self):
         from .index_post import PostIndex
