@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -68,7 +67,11 @@
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>{{ post.title }}</h1>
+                <h1>{{ post.title }}
+            {% for category in post.categories.all %}
+                <small><small>{{ category.name }}</small></small>
+            {% endfor %}
+                </h1>
 
                 <!-- Author -->
                 <p class="lead">
@@ -83,90 +86,12 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-
-                <hr>
-
+                <img class="img-responsive" src="{{ post.resized_title_image.url }}" alt="">
                 <!-- Post Content -->
-                {{ post.content|safe }}
-
-                <hr>
-
-
-                <div class="well">
-                    <a href="#" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-thumbs-up"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info btn-lg" href="javascript:showCommentBox()">
-                        <span class="glyphicon glyphicon-comment"></span>
-                     </a>
-                </div>
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <div class="hidden" id="comment_box">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form" id="commentForm" method="post" action="{% url 'post-comment' post.id %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
-                <hr>
-
+                    {% load markdown_deux_tags %}
+                    {{ post.content|markdown }}
                 <!-- Posted Comments -->
                 <!-- Comment -->
-                <ul id="comment_list">
-                </ul>
-                {% for comment in post.get_comments %}
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">{{ comment.title }}
-                                <small>{{ comment.datetime }}</small>
-                        <!--        <a onclick="showReplyBox({{ comment.id }})">reply</a></small> -->
-                            </h4>
-                            {{ comment.content }}
-                            <script>
-                                var comment_id = {{ comment.id }};
-                            </script>
-
-                            <div class="hidden" id="reply_box_{{ comment.id }}">
-                                <h4>Leave a Reply:</h4>
-                                <form role="form" id="replyForm_{{ comment.id }}" onsubmit="showReply(comment_id)" method="post" action="{% url 'post-reply' comment.id %}">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="content" rows="3"></textarea>
-                                        <input class="hidden" name="comment_id" value="{{ comment.id }}">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                                    <!-- Nested Comment -->
-                            {% if comment.replies_set.all is not None %}
-                                {% for reply in comment.replies_set.all %}
-                                    <div class="media">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object" src="http://placehold.it/64x64" alt="">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">{{ reply.title }}
-                                                <small>{{ reply.datetime }}</small>
-                                            </h4>
-                                            {{ reply.content }}
-                                    </div>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                            <!-- End Nested Comment -->
-                        </div>
-                    </div>
-                {% endfor %}
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
@@ -192,26 +117,14 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                                {% for category in categories %}
+                                    <li><a href="#">{{category}}</a></li>
+                                {%  endfor %}
                             </ul>
                         </div>
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -220,11 +133,42 @@
 
                 <!-- Side Widget Well -->
                 <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                    <div align="center">
+                        <h4><b>Random Quote</b></h4>
+                    </div>
+
+                    <p>{{ post.quote }}</p>
+
+                    <br>
+
+                    <div align="right">
+                        -<b><i>{{ post.quoted_by }}</i></b>
+                    </div>
                 </div>
 
             </div>
+
+            <div id="disqus_thread" class="col-lg-8"></div>
+            <script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+        */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://techalert-me.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 
         </div>
         <!-- /.row -->
@@ -235,7 +179,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; techalert.me 2017</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -267,6 +211,9 @@
         div.className='well';
         }
     </script>
+
+    <script id="dsq-count-scr" src="//techalert-me.disqus.com/count.js" async></script>
+
 </body>
 
 </html>

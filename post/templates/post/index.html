@@ -81,7 +81,7 @@
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.datetime|date }} at {{ post.datetime|time }}</p>
                     <hr>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <img class="img-responsive" src="{{ post.resized_title_image.url }}" alt="">
                     <hr>
                     <p>{{ post.head|safe }}</p>
                     <a class="btn btn-primary" href="{% url 'single-post' post.id%}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
