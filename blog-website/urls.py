@@ -25,4 +25,4 @@ urlpatterns = [
     url(r'^post/', include('post.urls')),
     url(r'^search/', include('search.urls')),] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns+=url(r'^', include('home.urls')),
+urlpatterns+=url(r'^', include('post.urls')),

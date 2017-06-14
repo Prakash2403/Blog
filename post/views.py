@@ -10,7 +10,7 @@ from post.models import Post
 
 
 def get_all_posts(request):
-
+    categories = Tag.objects.all()
     posts = Post.objects.all().order_by('-datetime')
     num_items = request.GET.get('num_items', 3)
     paginator = Paginator(posts, num_items)
@@ -21,7 +21,7 @@ def get_all_posts(request):
         posts = paginator.page(paginator.num_pages)
     except PageNotAnInteger:
         posts = paginator.page(1)
-    context = {'posts': posts, 'num_items': num_items}
+    context = {'posts': posts, 'num_items': num_items, 'categories': categories}
     return render(request, 'post/index.html', context=context)
 
 
