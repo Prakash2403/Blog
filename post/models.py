@@ -46,20 +46,21 @@ class Post(models.Model):
         return obj.to_dict(include_meta=True)
 
     def save(self, *args, **kwargs):
-        content_folder = settings.MEDIA_ROOT + '/content_files/'+self.title + '/'
-        img_folder = content_folder + 'img/'
-        resized_img_folder = content_folder + 'resized_img/'
-        if not os.path.exists(os.path.dirname(content_folder)):
-                os.makedirs(os.path.dirname(content_folder))
-        zip = zipfile.ZipFile(self.content_zip)
-        zipfile.ZipFile.extractall(zip, path=content_folder)
-        if not os.path.exists(os.path.dirname(img_folder)):
-            raise NotImplementedError(img_folder+'not found in zip file')
-        if not os.path.exists(os.path.dirname(resized_img_folder)):
-            os.makedirs(os.path.dirname(resized_img_folder))
-        img_files = os.listdir(img_folder)
-        for img_file in img_files:
-            source = img_folder + img_file
-            destination = resized_img_folder + 'resized_' + img_file
-            image_resizer.ResizeImage.resize_and_save_image(source=source, destination=destination)
+        if self.content_zip:
+            content_folder = settings.MEDIA_ROOT + '/content_files/'+self.title + '/'
+            img_folder = content_folder + 'img/'
+            resized_img_folder = content_folder + 'resized_img/'
+            if not os.path.exists(os.path.dirname(content_folder)):
+                    os.makedirs(os.path.dirname(content_folder))
+            zip = zipfile.ZipFile(self.content_zip)
+            zipfile.ZipFile.extractall(zip, path=content_folder)
+            if not os.path.exists(os.path.dirname(img_folder)):
+                raise NotImplementedError(img_folder+'not found in zip file')
+            if not os.path.exists(os.path.dirname(resized_img_folder)):
+                os.makedirs(os.path.dirname(resized_img_folder))
+            img_files = os.listdir(img_folder)
+            for img_file in img_files:
+                source = img_folder + img_file
+                destination = resized_img_folder + 'resized_' + img_file
+                image_resizer.ResizeImage.resize_and_save_image(source=source, destination=destination)
         super(Post, self).save(*args, **kwargs)
