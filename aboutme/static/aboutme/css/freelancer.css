@@ -38,6 +38,7 @@ hr.star-primary {
   text-align: center;
   max-width: 250px;
   margin: 25px auto 30px;
+
 }
 hr.star-light:after,
 hr.star-primary:after {
@@ -181,6 +182,10 @@ section h2 {
   font-size: 3em;
 }
 section.success {
+  background: white;
+  color: black;
+}
+section#contact{
   background: #18BC9C;
   color: white;
 }
@@ -244,7 +249,7 @@ section.success {
   position: relative;
   margin-bottom: 0;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid white;
 }
 .floating-label-form-group input,
 .floating-label-form-group textarea {
@@ -258,6 +263,9 @@ section.success {
   background: none;
   box-shadow: none !important;
   resize: none;
+}
+.form-control::placeholder{
+  color: white;
 }
 .floating-label-form-group label {
   display: block;
@@ -274,20 +282,21 @@ section.success {
   -moz-transition: top 0.3s ease,opacity 0.3s ease;
   -ms-transition: top 0.3s ease,opacity 0.3s ease;
   transition: top 0.3s ease,opacity 0.3s ease;
+
 }
 .floating-label-form-group:not(:first-child) {
   padding-left: 14px;
-  border-left: 1px solid #eeeeee;
+  border-left: 1px solid white;
 }
 .floating-label-form-group-with-value label {
   top: 0;
   opacity: 1;
 }
 .floating-label-form-group-with-focus label {
-  color: #18BC9C;
+  color: white;
 }
 form .row:first-child .floating-label-form-group {
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid white;
 }
 footer {
   color: white;

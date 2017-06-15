@@ -13,7 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
@@ -21,5 +23,6 @@ urlpatterns = [
     url(r'^home/', include('home.urls')),
     url(r'^aboutme/', include('aboutme.urls')),
     url(r'^post/', include('post.urls')),
-    url(r'^', include('home.urls')),
-]
+    url(r'^search/', include('search.urls')),] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns+=url(r'^', include('post.urls')),

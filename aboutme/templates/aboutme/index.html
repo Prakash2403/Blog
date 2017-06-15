@@ -9,13 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Techalert - About Us</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../static/aboutme/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="../../static/aboutme/css/freelancer.min.css" rel="stylesheet">
+    <link href="../../static/aboutme/css/freelancer.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../../static/aboutme/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>About</h2>
-                    <hr class="star-light">
+                    <hr class="star-primary">
                 </div>
             </div>
             <div class="row">
@@ -111,12 +111,15 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Contact Me</h2>
-                    <hr class="star-primary">
+                    <hr class="star-light">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <form name="sentMessage" id="contactForm" novalidate>
+                        <script>
+                            var csrftoken = '{{ csrf_token }}';
+                        </script>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="name">Name</label>
@@ -165,8 +168,7 @@
                 <div class="row">
                     <div class="footer-col col-md-4">
                         <h3>Location</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
+                        <p>Indian Institute of Information Technology, Vadodara</p>
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
@@ -196,7 +198,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2016
+                        Copyright &copy; techalert.me 2017
                     </div>
                 </div>
             </div>
