@@ -20,7 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^home/', include('home.urls')),
+    url(r'^archive/', include('archive.urls')),
     url(r'^aboutme/', include('aboutme.urls')),
     url(r'^post/', include('post.urls')),
     url(r'^search/', include('search.urls')),] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
-from home import views as home_views
+from post import views as post_views
 
 
 def search(request):
@@ -11,7 +11,7 @@ def search(request):
         .query("match", content=keyword)
     response = result_set.execute()
     id_list = get_id_from_response(response)
-    return home_views.index(request, id_list)
+    return post_views.get_all_posts(request, id_list)
 
 
 def get_id_from_response(response):

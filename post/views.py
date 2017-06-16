@@ -1,17 +1,17 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from taggit.models import Tag
 
-# TODO add views for searching
-from django.utils import timezone
 
 from post.models import Post
 
 
-def get_all_posts(request):
+def get_all_posts(request, id_list=None):
     categories = Tag.objects.all()
-    posts = Post.objects.all().order_by('-datetime')
+    if id_list:
+        posts = Post.objects.filter(pk__in=id_list).order_by('-datetime')
+    else:
+        posts = Post.objects.all().order_by('-datetime')
     num_items = request.GET.get('num_items', 3)
     paginator = Paginator(posts, num_items)
     page = request.GET.get('page', 1)

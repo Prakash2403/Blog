@@ -42,10 +42,10 @@
                 <a class="navbar-brand" href="#"><b>TECHALERT</b></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" align="right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/home/">Home</a>
+                        <a href="/archive/">Archive</a>
                     </li>
                     <li>
                         <a href="/aboutme/">About Me</a>
@@ -81,7 +81,9 @@
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.datetime|date }} at {{ post.datetime|time }}</p>
                     <hr>
+                    {% if post.title_image %}
                     <img class="img-responsive" src="{{ post.resized_title_image.url }}" alt="">
+                    {% endif %}
                     <hr>
                     <p>{{ post.head|safe }}</p>
                     <a class="btn btn-primary" href="{% url 'single-post' post.id%}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
