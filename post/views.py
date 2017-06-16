@@ -9,9 +9,9 @@ from post.models import Post
 def get_all_posts(request, id_list=None):
     categories = Tag.objects.all()
     if id_list:
-        posts = Post.objects.filter(pk__in=id_list).order_by('-datetime')
+        posts = Post.objects.filter(pk__in=id_list).filter(draft=False).order_by('-datetime')
     else:
-        posts = Post.objects.all().order_by('-datetime')
+        posts = Post.objects.all().filter(draft=False).order_by('-datetime')
     num_items = request.GET.get('num_items', 3)
     paginator = Paginator(posts, num_items)
     page = request.GET.get('page', 1)

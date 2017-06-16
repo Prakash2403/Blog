@@ -26,6 +26,7 @@ class Post(models.Model):
     categories = TaggableManager()
     quote = models.TextField(max_length=400, default='Stay hungry, Stay foolish')
     quoted_by = models.CharField(max_length=30, default='Steve Jobs')
+    draft = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
