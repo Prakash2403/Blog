@@ -49,3 +49,16 @@ This is optional, but if you want blog search feature, you have to setup elastic
     
     If you want to know about optional arguments, refer to django documentation.
 
+### Managing blog content
+    
+There are some extra things which needs to be done in order to fully utilize the blog.
+
+    1. Close the application by pressing Ctrl + C.
+    2. Run python manage.py createsuperuser.
+    3. Follow the instructions and fill required details.
+    4. Run python manage.py runserver.
+    5. Go to localhost:8000/admin.
+    6. Supply required credentials.
+    7. Now you can manage the contents of blog.
+
+Note: If you try to access aboutme/ page without filling any entry in About Me section in localhost:8000/admin/, it will show an error. So, make sure that before accessing that page, you fill something about yourself in /admin/ form.
