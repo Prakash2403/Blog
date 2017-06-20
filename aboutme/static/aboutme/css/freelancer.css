@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 body {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ font-family: 'Josefin Sans', sans-serif;
   overflow-x: hidden;
 }
 p {
@@ -294,6 +294,9 @@ section#contact{
 }
 .floating-label-form-group-with-focus label {
   color: white;
+}
+.but{
+  margin-left: 50%;
 }
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid white;
