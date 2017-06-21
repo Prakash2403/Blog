@@ -39,9 +39,9 @@ class Post(models.Model):
         obj = PostIndex(
             meta={'id': self.id},
             author=self.author,
-            datetime=self.datetime,
             title=self.title,
-            content=self.content
+            content=self.content,
+            categories=self.get_category()
         )
         obj.save()
         return obj.to_dict(include_meta=True)
@@ -65,3 +65,9 @@ class Post(models.Model):
                 destination = resized_img_folder + 'resized_' + img_file
                 image_resizer.ResizeImage.resize_and_save_image(source=source, destination=destination)
         super(Post, self).save(*args, **kwargs)
+
+    def get_category(self):
+        category_str = ""
+        for i in self.categories.iterator():
+            category_str = category_str + ' , ' + str(i)
+        return category_str

@@ -66,8 +66,6 @@ STATICFILES_DIRS = [
     BASE_DIR + "/media/",
 ]
 
-print(STATICFILES_DIRS)
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
