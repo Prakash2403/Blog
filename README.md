@@ -1,6 +1,6 @@
-#Blogging Platform
+# Blogging Platform
 
-##Features
+## Features
 
 1. Latex support.
 2. Markdown support.
@@ -11,7 +11,7 @@
 7. Draft option for posts which are not completed yet.
 
  
-##Features to add
+## Features to add
 1. Auto-completion using jQuery autocomplete and elasticsearch completion suggester.
 2. Spell checking for input search query and returning appropriate response using elasticsearch 
 term suggester.
