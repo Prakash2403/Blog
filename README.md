@@ -1,3 +1,24 @@
+#Blogging Platform
+
+##Features
+
+1. Latex support.
+2. Markdown support.
+3. Multiple file upload via zip folder. Contents get stored in `PROJECT_DIR/media/<post_title>/`
+4. Customized search engine powered by elasticsearch.
+5. Automatic title image resizing.
+6. Disqus support.
+7. Draft option for posts which are not completed yet.
+
+ 
+##Features to add
+1. Auto-completion using jQuery autocomplete and elasticsearch completion suggester.
+2. Spell checking for input search query and returning appropriate response using elasticsearch 
+term suggester.
+3. Personal commenting engine.
+4. HTTPS support.
+
+
 ## HOW TO RUN 
 
 ### Requirements:
@@ -12,29 +33,35 @@ Run the following commands in psql console:-
 
     CREATE DATABASE django_blog;
     CREATE USER django_blog WITH PASSWORD '\<set some password here\>';
-    GRANT ALL PRIVILEGES ON DATABASE djangp_blog TO django_blog;
+    GRANT ALL PRIVILEGES ON DATABASE django_blog TO django_blog;
     
 ### Environment Variables
 
-You have to set three environment variables.
+You have to set four environment variables.
 
     DB_NAME='django_blog'
     DB_USER='django_blog'
     DB_PASSWORD='<Whatever password you had entered above>'
-
+    ELASTICSEARCH_ENABLED = True
+    
+    
 ### Elasticsearch Settings
-
-This is optional, but if you want blog search feature, you have to setup elasticsearch.
 
     Go to https://www.elastic.co/downloads/elasticsearch
     Download elasticsearch and follow instructions given on that page to run it.
-    If elasticsearch is working properly, then uncomment last two lines at /post/apps.py
-    If you are facing some problem, then open an issue and post traceback there.   
+
+Sometimes, your system may lag when you run elasticsearch. This is because default memory allocated to elasticsearch is 
+2GB. So, if you are facing this problem, open config/jvm.options and set -Xms and -Xmx values to 512m. If still it lags,
+lower down the values to 256m. Make sure that Xms and Xmx values are same.
+
+If you want to turn off the search feature due to some reason, then set `ELASTICSEARCH_ENABLED=False`
+
+If you are facing some problem, then open an issue and post traceback there.   
 ### Run Web Application
 
 #### Prerequisite
   
-    Above two steps must be done.
+    There should be no error in above steps.
  
 #### How to run the web app
  
@@ -51,14 +78,32 @@ This is optional, but if you want blog search feature, you have to setup elastic
 
 ### Managing blog content
     
-There are some extra things which needs to be done in order to fully utilize the blog.
+There are some extra things which needs to be done in order to manage the blog.
 
-    1. Close the application by pressing Ctrl + C.
-    2. Run python manage.py createsuperuser.
-    3. Follow the instructions and fill required details.
-    4. Run python manage.py runserver.
-    5. Go to localhost:8000/admin.
-    6. Supply required credentials.
-    7. Now you can manage the contents of blog.
+    1. Create a super user by running python manage.py createsuperuser.
+    2. Go to localhost:8000/admin.
+    3. Supply required credentials.
+    4. Now you can manage the contents of blog.
 
-Note: If you try to access aboutme/ page without filling any entry in About Me section in localhost:8000/admin/, it will show an error. So, make sure that before accessing that page, you fill something about yourself in /admin/ form.
+Note: If you try to access aboutme/ page without filling any entry in About Me section in localhost:8000/admin/, 
+it will show an error. So, make sure that before accessing that page, you fill something about yourself in /admin/ 
+form.
+
+## TODOS
+
+1. Follow software engineering principles to enhance the code.
+2. Enhance the front end.
+3. Documentation of existing code.
+
+## Contributions
+
+Following points should be kept in mind while submitting a PR.
+1. Coding guidelines for languages must be followed.
+2. Code must be documented properly, and format of docstrings must be in standard 
+format for that language.
+3. PR title must be descriptive. It is advised to create an issue before submitting a PR and then 
+refer that issue while making the PR.
+
+## Demo
+
+Click [here](http://techalert.me) for demo.
