@@ -14,7 +14,7 @@ from post import image_resizer
 class Post(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True, editable=False)
     title = models.CharField(max_length=100)
-    title_image = models.ImageField(upload_to='title_images/', null=True,blank=True)
+    title_image = models.ImageField(upload_to='title_images/', null=True, blank=True)
     resized_title_image = ImageSpecField(source='title_image',
                                                 processors=[ResizeToFit(900, 300)],
                                                 format='JPEG',
@@ -35,7 +35,7 @@ class Post(models.Model):
         return self.content[:250]+'...'
 
     def indexing(self):
-        from .index_post import PostIndex
+        from .elasticsearch_operations import PostIndex
         obj = PostIndex(
             meta={'id': self.id},
             author=self.author,
@@ -45,6 +45,10 @@ class Post(models.Model):
         )
         obj.save()
         return obj.to_dict(include_meta=True)
+
+    def delete_post_from_elasticsearch(self):
+        from elasticsearch_operations import delete_post
+        delete_post(self.id)
 
     def save(self, *args, **kwargs):
         if self.content_zip:
