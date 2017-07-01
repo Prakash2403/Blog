@@ -37,7 +37,7 @@ Run the following commands in psql console:-
 
 You have to set four environment variables.
 
-    DB_NAME='django_blog'-
+    DB_NAME='django_blog'
     DB_USER='django_blog'
     DB_PASSWORD='<Whatever password you had entered above>'
     ELASTICSEARCH_ENABLED = True
