@@ -9,14 +9,12 @@
 5. Automatic title image resizing.
 6. Disqus support.
 7. Draft option for posts which are not completed yet.
+8. Fuzzy search powered by elasticsearch.
 
  
 ## Features to add
 1. Auto-completion using jQuery autocomplete and elasticsearch completion suggester.
-2. Spell checking for input search query and returning appropriate response using elasticsearch 
-term suggester.
-3. Personal commenting engine.
-4. HTTPS support.
+2. Personal commenting engine.
 
 
 ## HOW TO RUN 
@@ -39,7 +37,7 @@ Run the following commands in psql console:-
 
 You have to set four environment variables.
 
-    DB_NAME='django_blog'
+    DB_NAME='django_blog'-
     DB_USER='django_blog'
     DB_PASSWORD='<Whatever password you had entered above>'
     ELASTICSEARCH_ENABLED = True

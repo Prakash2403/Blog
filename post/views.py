@@ -26,10 +26,11 @@ def get_search_results(request, id_list):
     domain = request.GET.get('domain')
     keyword = request.GET.get('keyword')
     page = request.GET.get('page')
-    posts = Post.objects.all().filter(draft=False).filter(pk__in=id_list).order_by('-datetime')
+    posts = Post.objects.all().filter(draft=False).filter(pk__in=id_list)
     num_items = request.GET.get('num_items', 3)
     posts = paginate_post(page=page, posts=posts, num_items=num_items)
-    context = {'posts': posts, 'num_items': num_items, 'categories': categories, 'keyword': keyword, 'domain': domain}
+    context = {'posts': posts, 'num_items': num_items,
+               'categories': categories, 'keyword': keyword, 'domain': domain}
     return render(request, 'post/index.html', context=context)
 
 

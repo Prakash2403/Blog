@@ -2,7 +2,7 @@ import calendar
 import datetime
 from collections import OrderedDict
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 # Create your views here.
 from post.models import Post
