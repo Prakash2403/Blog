@@ -42,9 +42,9 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" align="right" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/post/">All Posts</a>
+                        <a href="/post/" >All Posts</a>
                     </li>
                     <li>
                         <a href="/archive/">Archive</a>
@@ -73,12 +73,15 @@
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>{{ post.title }}
-            {% for category in post.categories.all %}
-                <small><small>{{ category.name }}</small></small>
-            {% endfor %}
+                <h1>
+                    {{ post.title }}
                 </h1>
 
+                <h2>
+                    {% for category in post.categories.all %}
+                        <small><small>{{ category.name }}</small></small>
+                    {% endfor %}
+                </h2>
                 <!-- Author -->
                 <p class="lead">
                     by <a href="/aboutme/">{{ post.author }}</a>

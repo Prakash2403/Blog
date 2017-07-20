@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from taggit.models import Tag
 from post.models import Post
@@ -17,6 +18,8 @@ def get_all_posts(request):
 def get_single_post(request, post_id):
     categories = Tag.objects.all()
     post = get_object_or_404(Post, pk=post_id)
+    if post.draft:
+        raise Http404
     context = {'post': post,  'categories': categories}
     return render(request, 'post/single_post.html', context=context)
 

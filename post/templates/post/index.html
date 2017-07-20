@@ -43,7 +43,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" align="right" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/archive/">Archive</a>
                     </li>
@@ -79,7 +79,7 @@
                         <a href="{% url 'single-post' post.id%}">{{ post.title }}</a>
                     </h2>
                     <p class="lead">
-                        by {{ post.author }}
+                        by <a href="/aboutme/">{{ post.author }}</a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.datetime|date }} at {{ post.datetime|time }}</p>
                     <hr>
