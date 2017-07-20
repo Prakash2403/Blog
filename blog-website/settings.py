@@ -22,12 +22,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z^27(+trzq9)2=wv=)0yq*bwx!#itdz$os0p95s&2%kmbc7s-='
+# 'z^27(+trzq9)2=wv=)0yq*bwx!#itdz$os0p95s&2%kmbc7s-='
+SECRET_KEY = os.environ['BLOG_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('ON_PRODUCTION', True)
 
-ALLOWED_HOSTS = []
+
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['https://techalert.me']
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
+
 
 # Application definition
 

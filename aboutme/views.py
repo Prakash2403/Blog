@@ -17,6 +17,6 @@ def contactme_view(request):
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
-        contactme_obj =ContactMe(name=name, email=email, phone=phone, message=message)
+        contactme_obj = ContactMe(name=name, email=email, phone=phone, message=message)
         contactme_obj.save()
     return render(request, 'aboutme/index.html', context={'aboutme': aboutme})
