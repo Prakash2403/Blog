@@ -33,7 +33,7 @@ PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 if not PRODUCTION:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['techalert.me', gethostname()]
+    ALLOWED_HOSTS = ['techalert.me', '127.0.0.1']
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 
