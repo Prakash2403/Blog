@@ -15,6 +15,8 @@ import re
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from _socket import gethostname
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -31,7 +33,7 @@ PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 if not PRODUCTION:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['https://techalert.me']
+    ALLOWED_HOSTS = ['techalert.me', gethostname()]
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 
