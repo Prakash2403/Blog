@@ -25,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['BLOG_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('ON_PRODUCTION', True)
+PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 
 
-if DEBUG:
+if not PRODUCTION:
     ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = ['https://techalert.me']
