@@ -149,10 +149,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if PRODUCTION:
+    STATIC_ROOT = '/home/prakash/Blog/static'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if PRODUCTION:
+    MEDIA_ROOT = '/home/prakash/Blog/media'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TAGGIT_CASE_INSENSITIVE = True
 TIME_ZONE = 'Asia/Kolkata'
