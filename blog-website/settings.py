@@ -29,8 +29,9 @@ SECRET_KEY = os.environ['BLOG_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 
+DEBUG = not PRODUCTION
 
-if not PRODUCTION:
+if DEBUG:
     ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = ['techalert.me', '127.0.0.1']

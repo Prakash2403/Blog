@@ -23,10 +23,10 @@ urlpatterns = [
     url(r'^archive/', include('archive.urls')),
     url(r'^aboutme/', include('aboutme.urls')),
     url(r'^post/', include('post.urls')),
-    url(r'^search/', include('search.urls'))]
+    url(r'^search/', include('search.urls')), ]
 
-if not settings.PRODUCTION:
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-urlpatterns += url(r'^', include('post.urls'))
+urlpatterns += url(r'^', include('post.urls')),
