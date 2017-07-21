@@ -164,20 +164,14 @@
                 </div>
 
                 <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                {% for category in categories %}
-                                    <li><a href="/search?num_items={{ num_items }}&keyword={{ category }}&domain=category">{{category}}</a></li>
-                                {%  endfor %}
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-
-                        <!-- /.col-lg-6 -->
-                    </div>
+                <h4>Blog Categories</h4>
+                <div class="well" id="blog-categories">
+                    <ul class="list-unstyled">
+                        {% for category in categories %}
+                            <li><a href="/search?num_items={{ num_items }}&keyword={{ category }}&domain=category">{{category}}</a></li>
+                        {%  endfor %}
+                    </ul>
+                </div>
                     <!-- /.row -->
                 </div>
 
