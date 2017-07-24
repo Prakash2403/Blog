@@ -1,225 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base_post.html' %}
+{% block content %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
 
-<head>
+{% for post in posts %}
+    <div class="card-deck example" style="padding: 3rem; padding-right: 4rem; padding-left: 4rem" >
+        <div class="card" >
+            {% if post.title_image %}
+                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
+            {% endif %}
+            <div class="card-block z-depth-5">
+              <h4 class="card-title">
+                   <a href="{% url 'single-post' post.id %}">
+                       {{ post.title }}
+                   </a>
+              </h4>
+              <p class="card-text">
+                  {{ post.one_line_description | safe }}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>All posts - techalert.me</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../../static/post/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../../static/post/css/blog-post.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><b>TECHALERT</b></a>
+                <p>{{ post.author }}</p>
+              </p>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" align="right" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/archive/">Archive</a>
-                    </li>
-                    <li>
-                        <a href="/aboutme/">About Me</a>
-                    </li>
-                    <li>
-                        <a href="/aboutme/#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
-
-                <h1 class="page-header">
-                    All posts
-                </h1>
-                {% if posts is None %}
-                    No results Found
-                {% endif %}
-                {%  for post in posts %}
-                    <h2>
-                        <a href="{% url 'single-post' post.id%}">{{ post.title }}</a>
-                    </h2>
-                    <p class="lead">
-                        by <a href="/aboutme/">{{ post.author }}</a>
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.datetime|date }} at {{ post.datetime|time }}</p>
-                    <hr>
-                    {% if post.title_image %}
-                    <img class="img-responsive" src="{{ post.resized_title_image.url }}" alt="">
-                    {% endif %}
-                    <hr>
-                    {% load markdown_deux_tags %}
-                    <p>{{ post.head|markdown }}</p>
-                    <a class="btn btn-primary" href="{% url 'single-post' post.id%}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <hr>
-                {% endfor %}
-
-                <ul class="pager">
-                    {% if posts.has_previous %}
-                        {% if domain is not None %}
-                            <li class="previous">
-                            <a href="?page={{ posts.previous_page_number }}&num_items={{ num_items }}&domain={{ domain }}&keyword={{ keyword }}">&larr; Older</a>
-                            </li>
-                        {% else %}
-                            <li class="previous">
-                                <a href="?page={{ posts.previous_page_number }}&num_items={{ num_items }}">&larr; Older</a>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                    {% if posts.has_next %}
-                        {% if domain is not None %}
-                            <li class="next">
-                                <a href="?page={{ posts.next_page_number }}&num_items={{ num_items }}&domain={{ domain }}&keyword={{ keyword }}">&rarr; Newer</a>
-                            </li>
-                        {% else %}
-                            <li class="next">
-                                <a href="?page={{ posts.next_page_number }}&num_items={{ num_items }}">&rarr; Newer</a>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                </ul>
-                {% if keyword %}
-                    <h4>
-                        <p style="text-align:center;">&nbsp;
-                            <a href="?num_items=4&domain={{ domain }}&keyword={{ keyword }}">4</a>&nbsp;
-                            <a href="?num_items=6&domain={{ domain }}&keyword={{ keyword }}">6</a>&nbsp;
-                            <a href="?num_items=8&domain={{ domain }}&keyword={{ keyword }}">8 </a>&nbsp;
-                            <a href="?num_items=10&domain={{ domain }}&keyword={{ keyword }}">10</a>
-                            <br>
-                            Number of items per page
-                        </p>
-
-                    </h4>
-                {% else %}
-                    <h4>
-                        <p style="text-align:center;">&nbsp;
-                            <a href="?num_items=4">4</a>&nbsp;
-                            <a href="?num_items=6">6</a>&nbsp;
-                            <a href="?num_items=8">8 </a>&nbsp;
-                            <a href="?num_items=10">10</a>
-                            <br>
-                            Number of items per page
-                        </p>
-                    </h4>
-                {% endif %}
+    <div class="card">
+            {% if post.title_image %}
+                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
+            {% endif %}
+            <div class="card-block">
+              <h4 class="card-title">
+                   <a href="{% url 'single-post' post.id %}">
+                       {{ post.title }}
+                   </a>
+              </h4>
+              <p class="card-text">{{ post.one_line_description | safe }}</p>
             </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <form role="form" method="get" action="/search/" onsubmit="">
-                        <div class="input-group">
-                                <input type="text" name="keyword" placeholder="Search" class="form-control" id="search_text">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                                <input type="hidden" name="domain" value="post">
-                        </div>
-                    </form>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                {% for category in categories %}
-                                    <li><a href="/search?num_items={{ num_items }}&keyword={{ category }}&domain=category">{{category}}</a></li>
-                                {%  endfor %}
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Motivation for today</h4>
-                    <p>The people who are crazy enough to think that they can change the world are the ones who do.</p>
-                     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                     &nbsp; &nbsp;&nbsp; &nbsp;
-                    <i>-Steve Jobs</i>
-                </div>
-
-            </div>
-
         </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; techalert.me 2017</p>
-                </div>
-                <!-- /.col-lg-12 -->
+    <div class="card">
+            {% if post.title_image %}
+                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
+            {% endif %}
+            <div class="card-block">
+              <h4 class="card-title">
+                   <a href="{% url 'single-post' post.id %}">
+                       {{ post.title }}
+                   </a>
+              </h4>
+              <p class="card-text">{{ post.one_line_description | safe }}</p>
             </div>
-            <!-- /.row -->
-        </footer>
-
+        </div>
     </div>
-    <!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="../../static/post/js/jquery.js"></script>
+{% endfor %}
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../static/post/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+{% endblock %}

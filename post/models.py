@@ -15,13 +15,14 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True, editable=False)
     title = models.CharField(max_length=100)
     title_image = models.ImageField(upload_to='title_images/', null=True, blank=True)
+    one_line_description = models.CharField(max_length=200)
     resized_title_image = ImageSpecField(source='title_image',
                                                 processors=[ResizeToFit(900, 300)],
                                                 format='JPEG',
                                                 options={'quality': 60})
     author = models.CharField(max_length=30)
     datetime = models.DateTimeField(default=timezone.now)
-    content = models.TextField(max_length=10000)
+    content = models.TextField(max_length=1150000)
     content_zip = models.FileField(upload_to='zip', blank=True, null=True)
     categories = TaggableManager()
     quote = models.TextField(max_length=400, default='Stay hungry, Stay foolish')
@@ -30,9 +31,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-    def head(self):
-        return self.content[:250]+'...'
 
     def indexing(self):
         from .elasticsearch_operations import PostIndex

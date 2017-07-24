@@ -41,8 +41,13 @@ You have to set four environment variables.
     DB_USER='django_blog'
     DB_PASSWORD='<Whatever password you had entered above>'
     ELASTICSEARCH_ENABLED = True
+    BLOG_SECRET_KEY = <Generate a secret key for your server>
     
     
+### Blog Secret Key Settings
+    
+    Go to <YOUR_PROJECT_DIR>
+
 ### Elasticsearch Settings
 
     Go to https://www.elastic.co/downloads/elasticsearch
@@ -55,7 +60,7 @@ lower down the values to 256m. Make sure that Xms and Xmx values are same.
 If you want to turn off the search feature due to some reason, then set `ELASTICSEARCH_ENABLED=False`
 
 If you are facing some problem, then open an issue and post traceback there.   
-### Run Web Application
+
 
 #### Prerequisite
   
