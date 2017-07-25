@@ -6,14 +6,14 @@
         </b>
     </h1>
 
-    <h2>
+    <h3>
         {% for category in post.categories.all %}
             <small><small>{{ category.name }}</small></small>
         {% endfor %}
-    </h2>
+    </h3>
     <!-- Author -->
     <p class="lead">
-        by <a href="/aboutme/">{{ post.author }}</a>
+        by <a href="/aboutme/"><b>{{ post.author }}</b></a>
     </p>
 
     <hr>
@@ -24,14 +24,17 @@
 
     <!-- Preview Image -->
     {% if post.title_image %}
-        <img class="img-responsive" src="{{ post.resized_title_image.url }}" alt="" style="padding-left: 25rem; padding-right: 20rem; padding-top: 5rem; padding-bottom: 5rem; align-content: center">
+        <div style="justify-content: center">
+            <img class="img-responsive" src="{{ post.resized_title_image.url }}" style="padding-left: 15rem;
+            padding-right: 10rem; padding-bottom: 5rem;">
+        </div>
     {% endif %}
     <!-- Post Content -->
-    <div style="padding-left: 20rem; padding-right: 20rem; padding-top: 5rem; padding-bottom: 5rem; align-content: center">
+    <div style="padding-right: 8rem; padding-left: 8rem; padding-bottom: 5rem">
         {{ post.content|safe }}
     </div>
     {% block disqus %}
-        <div id="disqus_thread" style="padding-left: 20rem; padding-right: 20rem; padding-top: 5rem; align-content: center"></div>
+        <div id="disqus_thread" ></div>
             <script>
                 /**
                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

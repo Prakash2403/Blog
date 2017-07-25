@@ -143,3 +143,4 @@ ENV/
 /media/
 post/static/post/img/
 /static/
+!/post/static/post/img/

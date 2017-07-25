@@ -1,55 +1,21 @@
 {% extends 'base_post.html' %}
 {% block content %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-
-{% for post in posts %}
-    <div class="card-deck example" style="padding: 3rem; padding-right: 4rem; padding-left: 4rem" >
-        <div class="card" >
-            {% if post.title_image %}
-                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
-            {% endif %}
-            <div class="card-block z-depth-5">
-              <h4 class="card-title">
-                   <a href="{% url 'single-post' post.id %}">
-                       {{ post.title }}
-                   </a>
-              </h4>
-              <p class="card-text">
-                  {{ post.one_line_description | safe }}
-
-                <p>{{ post.author }}</p>
-              </p>
+    <div class="row">
+        {% for post in posts %}
+            <div class="card" style="width: 20rem; margin: 1.7rem; padding-bottom:50px; ">
+              <img class="card-img-top" src="{{ post.resized_title_image.url }}" width="100%" height="inherit">
+              <div class="card-block">
+                    <h5 class="card-title">
+                        <a href="{% url 'single-post' post.id %}">{{ post.title }}</a>
+                    </h5>
+                    <div class="card-text">
+                        {{ post.one_line_description }}
+                    </div>
+                    <div class="card-footer" style="position: absolute; bottom: 0; width: 100%; margin-left: -1.25rem">
+                      <small class="text-muted">{{ post.datetime }}</small>
+                    </div>
+              </div>
             </div>
-        </div>
-    <div class="card">
-            {% if post.title_image %}
-                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
-            {% endif %}
-            <div class="card-block">
-              <h4 class="card-title">
-                   <a href="{% url 'single-post' post.id %}">
-                       {{ post.title }}
-                   </a>
-              </h4>
-              <p class="card-text">{{ post.one_line_description | safe }}</p>
-            </div>
-        </div>
-    <div class="card">
-            {% if post.title_image %}
-                <img class="img-responsive" src="{{ post.title_image.url }}" alt="">
-            {% endif %}
-            <div class="card-block">
-              <h4 class="card-title">
-                   <a href="{% url 'single-post' post.id %}">
-                       {{ post.title }}
-                   </a>
-              </h4>
-              <p class="card-text">{{ post.one_line_description | safe }}</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-
-{% endfor %}
-
 {% endblock %}

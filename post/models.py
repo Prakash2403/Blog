@@ -6,7 +6,7 @@ from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from imagekit.models import ImageSpecField
-from imagekit.processors.resize import *
+import imagekit.processors
 
 from post import image_resizer
 
@@ -17,16 +17,14 @@ class Post(models.Model):
     title_image = models.ImageField(upload_to='title_images/', null=True, blank=True)
     one_line_description = models.CharField(max_length=200)
     resized_title_image = ImageSpecField(source='title_image',
-                                                processors=[ResizeToFit(900, 300)],
-                                                format='JPEG',
-                                                options={'quality': 60})
+                                         processors=[imagekit.processors.resize.ResizeToFit(900, 300)],
+                                         format='JPEG',
+                                         options={'quality': 60})
     author = models.CharField(max_length=30)
     datetime = models.DateTimeField(default=timezone.now)
     content = models.TextField(max_length=1150000)
     content_zip = models.FileField(upload_to='zip', blank=True, null=True)
     categories = TaggableManager()
-    quote = models.TextField(max_length=400, default='Stay hungry, Stay foolish')
-    quoted_by = models.CharField(max_length=30, default='Steve Jobs')
     draft = models.BooleanField(default=True)
 
     def __str__(self):
@@ -55,8 +53,8 @@ class Post(models.Model):
             resized_img_folder = content_folder + 'resized_img/'
             if not os.path.exists(os.path.dirname(content_folder)):
                     os.makedirs(os.path.dirname(content_folder))
-            zip = zipfile.ZipFile(self.content_zip)
-            zipfile.ZipFile.extractall(zip, path=content_folder)
+            content_zip = zipfile.ZipFile(self.content_zip)
+            zipfile.ZipFile.extractall(content_zip, path=content_folder)
             if not os.path.exists(os.path.dirname(img_folder)):
                 raise NotImplementedError(img_folder+'not found in zip file')
             if not os.path.exists(os.path.dirname(resized_img_folder)):
