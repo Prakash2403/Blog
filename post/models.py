@@ -1,14 +1,14 @@
 import os
 import zipfile
 
+import imagekit.processors
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from taggit.managers import TaggableManager
 from imagekit.models import ImageSpecField
-import imagekit.processors
+from taggit.managers import TaggableManager
 
-from post import image_resizer
+from utils import image_resizer
 
 
 class Post(models.Model):
@@ -17,21 +17,22 @@ class Post(models.Model):
     title_image = models.ImageField(upload_to='title_images/', null=True, blank=True)
     one_line_description = models.CharField(max_length=200)
     resized_title_image = ImageSpecField(source='title_image',
-                                         processors=[imagekit.processors.resize.ResizeToFit(900, 300)],
+                                         processors=[imagekit.processors.resize.ResizeToFit(600, 300)],
                                          format='JPEG',
-                                         options={'quality': 60})
+                                         options={'quality': 100})
     author = models.CharField(max_length=30)
     datetime = models.DateTimeField(default=timezone.now)
     content = models.TextField(max_length=1150000)
     content_zip = models.FileField(upload_to='zip', blank=True, null=True)
     categories = TaggableManager()
     draft = models.BooleanField(default=True)
+    markdown_support = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
     def indexing(self):
-        from .elasticsearch_operations import PostIndex
+        from utils.elasticsearch_operations import PostIndex
         obj = PostIndex(
             meta={'id': self.id},
             author=self.author,
@@ -43,7 +44,7 @@ class Post(models.Model):
         return obj.to_dict(include_meta=True)
 
     def delete_post_from_elasticsearch(self):
-        from elasticsearch_operations import delete_post
+        from utils.elasticsearch_operations import delete_post
         delete_post(self.id)
 
     def save(self, *args, **kwargs):

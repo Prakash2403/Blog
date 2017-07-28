@@ -3,8 +3,10 @@
     <div class="row">
         {% for post in posts %}
             <div class="card" style="width: 20rem; margin: 1.7rem; padding-bottom:50px; ">
-              <img class="card-img-top" src="{{ post.resized_title_image.url }}" width="100%" height="inherit">
-              <div class="card-block">
+                {% if post.resized_title_image %}
+                    <img class="card-img-top" src="{{ post.resized_title_image.url }}" width="100%" height="150px">
+                {% endif %}
+                <div class="card-block">
                     <h5 class="card-title">
                         <a href="{% url 'single-post' post.id %}">{{ post.title }}</a>
                     </h5>

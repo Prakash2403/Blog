@@ -8,12 +8,12 @@
 
     <h3>
         {% for category in post.categories.all %}
-            <small><small>{{ category.name }}</small></small>
+            <a href="/search?domain=category&keyword={{ category.name }}"><small><small>{{ category.name }}</small></small></a>
         {% endfor %}
     </h3>
     <!-- Author -->
     <p class="lead">
-        by <a href="/aboutme/"><b>{{ post.author }}</b></a>
+        <b>by</b> <a href="/aboutme/"><b>{{ post.author }}</b></a>
     </p>
 
     <hr>
@@ -31,7 +31,12 @@
     {% endif %}
     <!-- Post Content -->
     <div style="padding-right: 8rem; padding-left: 8rem; padding-bottom: 5rem">
-        {{ post.content|safe }}
+        {% if post.markdown_support %}
+            {% load markdown_deux_tags %}
+            {{ post.content|markdown }}
+        {% else %}
+            {{ post.content|safe }}
+        {% endif %}
     </div>
     {% block disqus %}
         <div id="disqus_thread" ></div>

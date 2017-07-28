@@ -39,17 +39,18 @@
           <div class="collapse navbar-collapse navbar-right" id="navbar-blog" style="width: auto; float: right">
               <ul class="navbar-nav mr-auto mt-2 mt-md-0" style="float: right" >
                   <li class="nav-item">
-                        <a class="nav-link" href="/archive" ><b>Archive</b> </a>
+                        <a class="nav-link" style="color: #FFFFFF" href="/archive" ><b>Archive</b> </a>
                   </li>
                   <li class="nav-item">
-                        <a class="nav-link" href="/aboutme"><b>About Me</b></a>
+                        <a class="nav-link" style="color: #FFFFFF" href="/aboutme"><b>About Me</b></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/aboutme/#contact"><b>Contact Me</b></a>
+                      <a class="nav-link" style="color: #FFFFFF" href="/aboutme/#contact"><b>Leave a message</b></a>
                   </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" style="padding-left: 3rem">
-                      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <form class="form-inline my-2 my-lg-0" style="padding-left: 3rem" role="search" method="get" action="/search">
+                      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search">
+                      <input class="hidden" type="hidden" name="domain" value="post">
                       <button class="btn btn-secondary" type="submit">Search</button>
                 </form>
           </div>

@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import secret_key_generator
 
+from utils import secret_key_generator
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +23,7 @@ PROJECT_PATH = BASE_DIR
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret_key_generator.get_secret_key()
+SECRET_KEY = secret_key_generator.get_secret_key(os.path.join(PROJECT_PATH, 'secret.txt'))
 
 PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 
@@ -148,16 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-if PRODUCTION:
-    STATIC_ROOT = os.path.expanduser('~/Blog/static')
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-if PRODUCTION:
-    MEDIA_ROOT = os.path.expanduser('~/Blog/media')
-else:
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TAGGIT_CASE_INSENSITIVE = True
 TIME_ZONE = 'Asia/Kolkata'
