@@ -8,8 +8,10 @@
 4. Customized search engine powered by elasticsearch.
 5. Automatic title image resizing.
 6. Disqus support.
-7. Draft option for posts which are not completed yet.
+7. Draft option for posts which are not completed.
 8. Fuzzy search powered by elasticsearch.
+9. Separate SECRET_KEY for each user.
+10. Settings for `https`, applicable only if your website uses `https`.
 
  
 ## Features to add
@@ -24,6 +26,9 @@
 1. Postgresql should be installed.
 
 2. Go to project directory. Run pip install -r requirements.txt to install python requirememtns.
+
+3. User running this project must have rights to read from a file and write to a file within the project
+   directory.
 
 ### Database Settings
 
@@ -41,8 +46,9 @@ You have to set four environment variables.
     DB_USER='django_blog'
     DB_PASSWORD='<Whatever password you had entered above>'
     ELASTICSEARCH_ENABLED = True
-    
-    
+    BLOG_SECRET_KEY = <Generate a secret key for your server>
+
+
 ### Elasticsearch Settings
 
     Go to https://www.elastic.co/downloads/elasticsearch
@@ -55,7 +61,7 @@ lower down the values to 256m. Make sure that Xms and Xmx values are same.
 If you want to turn off the search feature due to some reason, then set `ELASTICSEARCH_ENABLED=False`
 
 If you are facing some problem, then open an issue and post traceback there.   
-### Run Web Application
+
 
 #### Prerequisite
   

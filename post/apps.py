@@ -8,4 +8,4 @@ class PostConfig(AppConfig):
 
     if os.environ.get('ELASTICSEARCH_ENABLED', True):
         def ready(self):
-            import signals
+            import utils.signals

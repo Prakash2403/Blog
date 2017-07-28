@@ -1,8 +1,8 @@
 from elasticsearch_dsl.connections import connections
-from elasticsearch_dsl import DocType, Text, Date
+from elasticsearch_dsl import DocType, Text
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
-import models
+import post.models
 
 connections.create_connection()
 
@@ -10,7 +10,7 @@ connections.create_connection()
 def bulk_indexing():
     PostIndex.init("post")
     es = Elasticsearch()
-    bulk(client=es, actions=(b.indexing() for b in models.Post.objects.all().iterator()))
+    bulk(client=es, actions=(b.indexing() for b in post.models.Post.objects.all().iterator()))
 
 
 def delete_post(post_id):
@@ -26,5 +26,3 @@ class PostIndex(DocType):
 
     class Meta:
         index = 'blog'
-
-

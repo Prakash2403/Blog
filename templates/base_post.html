@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+    <title>Techalert</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-toggleable-md navbar-dark bg-inverse" style="margin-bottom: 4rem">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" style="width: auto" href="/"><b>TECHALERT</b></a>
+          <div class="collapse navbar-collapse navbar-right" id="navbar-blog" style="width: auto; float: right">
+              <ul class="navbar-nav mr-auto mt-2 mt-md-0" style="float: right" >
+                  <li class="nav-item">
+                        <a class="nav-link" style="color: #FFFFFF" href="/archive" ><b>Archive</b> </a>
+                  </li>
+                  <li class="nav-item">
+                        <a class="nav-link" style="color: #FFFFFF" href="/aboutme"><b>About Me</b></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" style="color: #FFFFFF" href="/aboutme/#contact"><b>Leave a message</b></a>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" style="padding-left: 3rem" role="search" method="get" action="/search">
+                      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search">
+                      <input class="hidden" type="hidden" name="domain" value="post">
+                      <button class="btn btn-secondary" type="submit">Search</button>
+                </form>
+          </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+        <div id="disqus_thread" class="col-lg-8"></div>
+        {% block disqus %}
+        {% endblock %}
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; techalert.me 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+    {% block disqus-count %}
+    {% endblock %}
+</body>
+
+</html>

@@ -11,25 +11,25 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import re
 
+from utils import secret_key_generator
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from _socket import gethostname
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = BASE_DIR
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['BLOG_SECRET_KEY']
+SECRET_KEY = secret_key_generator.get_secret_key(os.path.join(PROJECT_PATH, 'secret.txt'))
 
-# SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = os.environ.get('ON_PRODUCTION', False)
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not PRODUCTION
+
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -37,7 +37,6 @@ else:
     ALLOWED_HOSTS = ['techalert.me', '127.0.0.1']
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-
 
 
 # Application definition
@@ -80,8 +79,7 @@ STATICFILES_DIRS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,16 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-if PRODUCTION:
-    STATIC_ROOT = '/home/prakash/Blog/static'
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-if PRODUCTION:
-    MEDIA_ROOT = '/home/prakash/Blog/media'
-else:
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TAGGIT_CASE_INSENSITIVE = True
 TIME_ZONE = 'Asia/Kolkata'

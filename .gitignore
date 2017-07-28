@@ -4,7 +4,6 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
 
@@ -140,5 +139,8 @@ ENV/
 .ropeproject
 
 .idea/
-*.py[co]
-**/*.pyc
+/Blog templates/
+/media/
+post/static/post/img/
+/static/
+!/post/static/post/img/
